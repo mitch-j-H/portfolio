@@ -49,7 +49,7 @@ window.onload = () => {
         languageChange(event, xplodeWords);
     });
     
-    // submitButton.addEventListener("click", contactProcessor);
+    submitButton.addEventListener("click", contactProcessor);
 }
 
 // opens and close folder/headings in skill tree
