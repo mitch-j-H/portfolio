@@ -207,7 +207,6 @@
                       <h3><span class="project-heading">Portfolio</span></h3>  
                       <a href="https://github.com/mitch-j-H/portfolio"><img src="./assets/img/button-github.png" alt="Link to github" class="github-proj-btn"></a>
                     </div>
-                    
                     <p id="idProj4">This portfolio, I worked hard on the design aspect and front end functionality as this is just a static site and does not need a backend. Its focus was primarily on usability and responsive design.</p>
                     <div class="language-group">
                         <span>Javascript</span>
@@ -230,14 +229,17 @@
                 <div class="contact-form-input">
                     <label for="form-name" class="form-label" id="idName">NAME</label>
                     <input type="text" id="qsdenamepofd" name="qsdenamepofd" class="form-field" required>
+                    <div id="nameError"></div>
                 </div>
                 <div class="contact-form-input">
                     <label for="iedfemailopv" class="form-label">EMAIL</label>
                     <input type="email" id="iedfemailopv" name="iedfemailopv" class="form-field" required>
+                    <div id="emailError"></div>
                 </div>
                 <div class="contact-form-input">
                     <label for="nqsfmmessagepods" class="form-label">MESSAGE</label>
                     <textarea name="message" id="nqsfmmessagepods" name="nqsfmmessagepods" cols="30" rows="10" class="form-field" required></textarea>
+                    <div id="messageError"></div>
                 </div> 
                     <label class="ohnohoney" for="name"></label>
                     <input class="ohnohoney" autocomplete="off" type="text" id="name" name="name" placeholder="Your name here" tabindex="-1">

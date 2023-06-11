@@ -64,7 +64,7 @@
         "idContMe": "Me contacter",
         "idTouch": "Prendre contact",
         "idName": "NOM",
-        "idContSent": "Merci de m&apos;avoir contacté, je reviendrai vers vous dans les plus brefs délais.\r\nN&apos;hésitez pas à visiter mes comptes Github, Linkedin et à télécharger mon CV.",
+        "idContSent": "Merci de m'avoir contacté, je reviendrai vers vous dans les plus brefs délais.\r\nN'hésitez pas à visiter mes comptes Github, Linkedin et à télécharger mon CV.",
         "error-message": "Il y a eu une erreur imprévue veuillez réessayer à un autre moment."
     }
 }

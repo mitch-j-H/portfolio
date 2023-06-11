@@ -1,22 +1,7 @@
-// this imports the translation JSON file so we can treat it later on
-// import data from './assets/languages/lang.JSON' /assert { type: 'json'};
-
+// this replaces import assert type function to import JSON
 let data = importJson();
 let result;
 data.then((res) => result = res);
-
-// {Object.keys(res.en).forEach(id => {
-//     console.log(res.en[id]);
-// })
-// }
-
-// console.log(data);
-
-// console.log(Array.isArray(data));
-// console.log(data instanceof Object);
-// console.log(data.toString());
-
-
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -31,6 +16,7 @@ window.onload = () => {
         xplodeWords = document.querySelectorAll(".xplode"),
         language = document.querySelector(".lang-options"),
         mobLanguage = document.querySelector(".lang-selector"),
+        form = document.getElementById("contact-form"),
         submitButton = document.getElementById("submitButton");
 
     // add event listeners to each heading
@@ -67,6 +53,8 @@ window.onload = () => {
     });
     
     submitButton.addEventListener("click", contactProcessor);
+
+    form.addEventListener("focusin", liveFormChecker);
 }
 
 // opens and close folder/headings in skill tree
@@ -204,11 +192,18 @@ function contactProcessor(event){
 
     let contactName = document.getElementById("qsdenamepofd").value,
         contactEmail = document.getElementById("iedfemailopv").value,
+        emailError = document.getElementById("emailError"),
         contactMessage = document.getElementById("nqsfmmessagepods").value,
         checkPots1 = document.getElementById("name").innerHTML,
         checkPots2 = document.getElementById("email").innerHTML,
         container = document.getElementById("contact-container"),
         form = document.getElementById("contact-form");
+
+        if(emailChecker(contactEmail) != true){
+            console.log("false");
+            insertFieldError(emailError, "Please input a valid email address");
+            return;
+        }
 
         console.log(contactName);
         console.log(contactEmail);
@@ -232,12 +227,13 @@ function contactProcessor(event){
     // ===========================================================
     try {
         // submitContactForm(contactObject);
+        afterContactSent(container, form);
     } catch (error) {
-        console.log(`there was error: ${error}`);
+        console.log(error);
         errorMessage();
     }
 
-    afterContactSent(container, form);
+    
 }
 
 // return form to empty state
@@ -251,11 +247,11 @@ function afterContactSent(container, form){
     p.className = "contact-sent";
 
     if(currentLanguage == "English"){
-        p.innerText = data.en["idContSent"];
+        p.innerText = result.en["idContSent"];
     }
 
     if(currentLanguage == "Français"){
-        p.innerText = data.fr["idContSent"];
+        p.innerText = result.fr["idContSent"];
     }
 
     container.appendChild(p);
@@ -268,14 +264,33 @@ function errorMessage(){
         p = document.createElement("p");
 
     if(currentLanguage == "English"){
-        p.innerText = data.en["error-message"];
+        p.innerText = result.en["error-message"];
     }
 
     if(currentLanguage == "Français"){
-        p.innerText = data.fr["error-message"];
+        p.innerText = result.fr["error-message"];
     }
 
+    errorPlacement.innerHTML = "";
     errorPlacement.appendChild(p);
+}
+
+function insertFieldError(location, error){
+    let p = document.createElement('p');
+
+    p.className = "error-message";
+
+    p.innerText = error;
+
+    location.innerHTML = "";
+
+    location.appendChild(p);
+}
+
+// check valid email
+function emailChecker(addressValue){
+    let regx = /\S+@\S+\.\S+/;
+    return regx.test(addressValue);
 }
 
 // basic controller to control language state
@@ -349,9 +364,33 @@ async function importJson(){
 
     const data = await res.json();
 
-    // console.log(JSON.stringify(data));
-
-    // let data2 = JSON.stringify(data);
-
     return data;
+}
+
+function liveFormChecker(event){
+    let input = event.target,
+        form = document.getElementById("contact-form"),
+        name = document.getElementById("qsdenamepofd"),
+        email = document.getElementById("iedfemailopv"),
+        message = document.getElementById("nqsfmmessagepods"),
+        submitButton = document.getElementById("submitButton");
+
+    if(input == name || name.value == ""){
+        name.classList.add("form-invalid");
+    } else {
+        name.classList.remove("form-invalid");
+    }
+
+    if(input == email || emailChecker(email.value) != true){
+        email.classList.add("form-invalid");
+    } else {
+        email.classList.remove("form-invalid");
+    }
+    
+    if(input == message || message.value == ""){
+        message.classList.add("form-invalid");
+    }else {
+        message.classList.remove("form-invalid");
+    }
+
 }
