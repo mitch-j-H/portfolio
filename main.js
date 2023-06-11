@@ -1,5 +1,22 @@
 // this imports the translation JSON file so we can treat it later on
-import data from './assets/languages/lang.JSON' assert { type: 'json'};
+// import data from './assets/languages/lang.JSON' /assert { type: 'json'};
+
+let data = importJson();
+let result;
+data.then((res) => result = res);
+
+// {Object.keys(res.en).forEach(id => {
+//     console.log(res.en[id]);
+// })
+// }
+
+// console.log(data);
+
+// console.log(Array.isArray(data));
+// console.log(data instanceof Object);
+// console.log(data.toString());
+
+
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -183,17 +200,21 @@ async function submitContactForm(emailObject){
 
 // get form data
 function contactProcessor(event){
-    // event.preventDefault;
+    event.preventDefault;
 
-    let contactName = document.getElementById("qsdenamepofd"),
-        contactEmail = document.getElementById("iedfemailopv"),
-        contactMessage = document.getElementById("nqsfmmessagepods"),
-        checkPots1 = document.getElementById("name"),
-        checkPots2 = document.getElementById("email"),
+    let contactName = document.getElementById("qsdenamepofd").value,
+        contactEmail = document.getElementById("iedfemailopv").value,
+        contactMessage = document.getElementById("nqsfmmessagepods").value,
+        checkPots1 = document.getElementById("name").innerHTML,
+        checkPots2 = document.getElementById("email").innerHTML,
         container = document.getElementById("contact-container"),
         form = document.getElementById("contact-form");
 
-    if(checkPots1 != null || checkPots2 != null){
+        console.log(contactName);
+        console.log(contactEmail);
+        console.log(contactMessage);
+
+    if(checkPots1 != "" || checkPots2 != ""){
         afterContactSent(container, form);
         return
     }
@@ -204,11 +225,13 @@ function contactProcessor(event){
         message: contactMessage
     };
 
+    console.log(contactObject);
+
     // ===========================================================
     // I AM HERE TRYING TO FIGURE OUT HOW TO DO ERROR HANDLING FOR THE CONTACT FORM
     // ===========================================================
     try {
-        submitContactForm(contactObject);
+        // submitContactForm(contactObject);
     } catch (error) {
         console.log(`there was error: ${error}`);
         errorMessage();
@@ -260,10 +283,10 @@ function languageChange(event, xplode){
     let selection = event.target.id;
     
     if(selection === "lang-btn-fr"){
-        repopulateText(data.fr);
+        repopulateText(result.fr);
         changeButton("Français");
     } else {
-        repopulateText(data.en);
+        repopulateText(result.en);
         changeButton("English");
     }
     let xplodenew = moveClasses();
@@ -318,4 +341,17 @@ function moveClasses(){
     let xplodeWords = document.querySelectorAll(".xplode");
 
     return xplodeWords;
+}
+
+// fixing import assertion problem on certain browsers
+async function importJson(){
+    const res = await fetch("./assets/languages/lang.JSON");
+
+    const data = await res.json();
+
+    // console.log(JSON.stringify(data));
+
+    // let data2 = JSON.stringify(data);
+
+    return data;
 }
