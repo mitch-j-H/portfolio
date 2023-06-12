@@ -216,6 +216,7 @@ html, body {
     border-radius: 4px;
     margin: 5%;
     width: 80%;
+    /* max-width: 1000px; */
 }
 
 .window-container__title-bar {
@@ -419,6 +420,7 @@ html, body {
     justify-content: space-between;
     height: 45vh;
     width: 100%;
+    max-width: 1000px;
     overflow: hidden;
     justify-content: center;
 }
