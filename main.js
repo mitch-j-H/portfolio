@@ -212,17 +212,17 @@ function contactProcessor(event){
         errorCounter = 0;
 
     if(emailChecker(contactEmail) != true){
-        insertFieldError(emailError, "Please input a valid email  address");
+        insertFieldError(emailError, emailMessage());
         errorCounter += 1;
     }
 
     if(contactName == ""){
-        insertFieldError(nameError, "This field cannot be left blank");
+        insertFieldError(nameError, otherMessage());
         errorCounter += 1;
     }
 
     if(contactEmail == ""){
-        insertFieldError(messageError, "This field cannot be left blank");
+        insertFieldError(messageError, otherMessage());
         errorCounter += 1;
     }
 
@@ -422,4 +422,28 @@ function responseReplacer(object){
         newemailObject[key] = preFiltered;
     })
     return newemailObject;
+}
+
+function otherMessage(){
+    let currentLanguage = document.getElementById("lang-btn-select").dataset.lang;
+
+    if(currentLanguage == "English"){
+        return result.err.en.other;
+    }
+
+    if(currentLanguage == "Français"){
+        return result.err.fr.other;
+    }
+}
+
+function emailMessage(){
+    let currentLanguage = document.getElementById("lang-btn-select").dataset.lang;
+
+    if(currentLanguage == "English"){
+        return result.err.en.email;
+    }
+
+    if(currentLanguage == "Français"){
+        return result.err.fr.email;
+    }
 }

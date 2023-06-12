@@ -66,6 +66,16 @@
         "idName": "NOM",
         "idContSent": "Merci de m'avoir contacté, je reviendrai vers vous dans les plus brefs délais.\r\nN'hésitez pas à visiter mes comptes Github, Linkedin et à télécharger mon CV.",
         "error-message": "Il y a eu une erreur imprévue veuillez réessayer à un autre moment."
+    },
+    "err":{
+        "en":{
+            "other": "This field cannot be left blank",
+            "email": "Please input a valid email  address"
+        },
+        "fr":{
+            "other": "Ce champ ne peut pas être laissé vide",
+            "email": "Veuillez saisir une adresse e-mail valide"
+        }
     }
 }
 
