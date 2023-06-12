@@ -186,11 +186,11 @@ async function submitContactForm(emailObject){
 })
     .then(response => response.json())
     .then((data) => {
-        console.log(data);
+        // console.log(data);
         afterContactSent(container, form);
     })
     .catch((error) => {
-        console.log(error);
+        // console.log(error);
         errorMessage();
     });
 }
@@ -241,9 +241,7 @@ function contactProcessor(event){
         message: contactMessage
     };
 
-    console.log(contactObject);
     let filtered = responseReplacer(contactObject);
-    console.log(filtered);
 
     submitContactForm(filtered);    
 }
