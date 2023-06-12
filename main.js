@@ -168,7 +168,10 @@ async function submitContactForm(emailObject){
         return console.error("Fields incomplete unable to process Fetch request");
     }
 
-    fetch("https://formsubmit.co/ajax/contact@mitchellhenwood.com", { 
+    let container = document.getElementById("contact-container"),
+        form = document.getElementById("contact-form");
+
+    fetch("https://formsubmit.co/ajax/contact@mitchellhenwood.com", {
     method: "POST",
     headers: { 
         'Content-Type': 'application/json',
@@ -182,32 +185,50 @@ async function submitContactForm(emailObject){
     })
 })
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
+    .then((data) => {
+        console.log(data);
+        afterContactSent(container, form);
+    })
+    .catch((error) => {
+        console.log(error);
+        errorMessage();
+    });
 }
 
-// get form data
+// get form data and perform basic santisation
 function contactProcessor(event){
     event.preventDefault;
 
     let contactName = document.getElementById("qsdenamepofd").value,
         contactEmail = document.getElementById("iedfemailopv").value,
         emailError = document.getElementById("emailError"),
+        nameError = document.getElementById("nameError"),
+        messageError = document.getElementById("messageError"),
         contactMessage = document.getElementById("nqsfmmessagepods").value,
         checkPots1 = document.getElementById("name").innerHTML,
         checkPots2 = document.getElementById("email").innerHTML,
         container = document.getElementById("contact-container"),
-        form = document.getElementById("contact-form");
+        form = document.getElementById("contact-form"),
+        errorCounter = 0;
 
-        if(emailChecker(contactEmail) != true){
-            console.log("false");
-            insertFieldError(emailError, "Please input a valid email address");
-            return;
-        }
+    if(emailChecker(contactEmail) != true){
+        insertFieldError(emailError, "Please input a valid email  address");
+        errorCounter += 1;
+    }
 
-        console.log(contactName);
-        console.log(contactEmail);
-        console.log(contactMessage);
+    if(contactName == ""){
+        insertFieldError(nameError, "This field cannot be left blank");
+        errorCounter += 1;
+    }
+
+    if(contactEmail == ""){
+        insertFieldError(messageError, "This field cannot be left blank");
+        errorCounter += 1;
+    }
+
+    if(errorCounter > 0){
+        return;
+    }
 
     if(checkPots1 != "" || checkPots2 != ""){
         afterContactSent(container, form);
@@ -221,19 +242,10 @@ function contactProcessor(event){
     };
 
     console.log(contactObject);
+    let filtered = responseReplacer(contactObject);
+    console.log(filtered);
 
-    // ===========================================================
-    // I AM HERE TRYING TO FIGURE OUT HOW TO DO ERROR HANDLING FOR THE CONTACT FORM
-    // ===========================================================
-    try {
-        // submitContactForm(contactObject);
-        afterContactSent(container, form);
-    } catch (error) {
-        console.log(error);
-        errorMessage();
-    }
-
-    
+    submitContactForm(filtered);    
 }
 
 // return form to empty state
@@ -392,5 +404,22 @@ function liveFormChecker(event){
     }else {
         message.classList.remove("form-invalid");
     }
+}
 
+function responseReplacer(object){
+    let newemailObject = {};
+    Object.keys(object).forEach(key => {
+        let preFiltered = object[key];
+
+        preFiltered = preFiltered.replaceAll('<', '&lt;');
+
+        preFiltered = preFiltered.replaceAll('>', '&gt;');
+
+        preFiltered = preFiltered.replaceAll('\'', '&apos');
+
+        preFiltered = preFiltered.replaceAll('\"', '&quot;');
+
+        newemailObject[key] = preFiltered;
+    })
+    return newemailObject;
 }
