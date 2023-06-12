@@ -404,6 +404,7 @@ function liveFormChecker(event){
     }
 }
 
+// performs basic data sanitisation
 function responseReplacer(object){
     let newemailObject = {};
     Object.keys(object).forEach(key => {
@@ -422,6 +423,7 @@ function responseReplacer(object){
     return newemailObject;
 }
 
+// fr & en error messages for name and message in contact form
 function otherMessage(){
     let currentLanguage = document.getElementById("lang-btn-select").dataset.lang;
 
@@ -434,6 +436,7 @@ function otherMessage(){
     }
 }
 
+// fr & en error messages for email in contact form
 function emailMessage(){
     let currentLanguage = document.getElementById("lang-btn-select").dataset.lang;
 
