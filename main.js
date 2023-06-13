@@ -186,11 +186,9 @@ async function submitContactForm(emailObject){
 })
     .then(response => response.json())
     .then((data) => {
-        // console.log(data);
         afterContactSent(container, form);
     })
     .catch((error) => {
-        // console.log(error);
         errorMessage();
     });
 }
@@ -211,6 +209,10 @@ function contactProcessor(event){
         form = document.getElementById("contact-form"),
         errorCounter = 0;
 
+    nameError.innerHTML = "";
+    emailError.innerHTML = "";
+    messageError.innerHTML = "";
+
     if(emailChecker(contactEmail) != true){
         insertFieldError(emailError, emailMessage());
         errorCounter += 1;
@@ -221,7 +223,7 @@ function contactProcessor(event){
         errorCounter += 1;
     }
 
-    if(contactEmail == ""){
+    if(contactMessage == ""){
         insertFieldError(messageError, otherMessage());
         errorCounter += 1;
     }
@@ -285,14 +287,13 @@ function errorMessage(){
     errorPlacement.appendChild(p);
 }
 
+//inserts invalid input response messages
 function insertFieldError(location, error){
     let p = document.createElement('p');
 
     p.className = "error-message";
 
     p.innerText = error;
-
-    location.innerHTML = "";
 
     location.appendChild(p);
 }
@@ -414,9 +415,10 @@ function responseReplacer(object){
 
         preFiltered = preFiltered.replaceAll('>', '&gt;');
 
-        preFiltered = preFiltered.replaceAll('\'', '&apos');
+        // temp pausing this validation
+        // preFiltered = preFiltered.replaceAll('\'', '&apos');
 
-        preFiltered = preFiltered.replaceAll('\"', '&quot;');
+        // preFiltered = preFiltered.replaceAll('\"', '&quot;');
 
         newemailObject[key] = preFiltered;
     })
