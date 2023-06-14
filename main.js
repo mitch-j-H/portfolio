@@ -55,6 +55,7 @@ window.onload = () => {
     submitButton.addEventListener("click", contactProcessor);
 
     form.addEventListener("focusin", liveFormChecker);
+    form.addEventListener("keyup", liveFormChecker);
 }
 
 // opens and close folder/headings in skill tree
@@ -386,19 +387,39 @@ function liveFormChecker(event){
         message = document.getElementById("nqsfmmessagepods"),
         submitButton = document.getElementById("submitButton");
 
-    if(input == name || name.value == ""){
+    // if(input == name || name.value == ""){
+    //     name.classList.add("form-invalid");
+    // } else {
+    //     name.classList.remove("form-invalid");
+    // }
+
+    // if(input == email || emailChecker(email.value) != true){
+    //     email.classList.add("form-invalid");
+    // } else {
+    //     email.classList.remove("form-invalid");
+    // }
+    
+    // if(input == message || message.value == ""){
+    //     if(message.value == ""){
+    //         message.classList.add("form-invalid");
+    //     }
+    // }else {
+    //     message.classList.remove("form-invalid");
+    // }
+
+    if(name.value == ""){
         name.classList.add("form-invalid");
     } else {
         name.classList.remove("form-invalid");
     }
 
-    if(input == email || emailChecker(email.value) != true){
+    if(emailChecker(email.value) != true){
         email.classList.add("form-invalid");
     } else {
         email.classList.remove("form-invalid");
     }
     
-    if(input == message || message.value == ""){
+    if(message.value == ""){
         message.classList.add("form-invalid");
     }else {
         message.classList.remove("form-invalid");

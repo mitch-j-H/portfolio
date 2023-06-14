@@ -569,7 +569,7 @@ textarea {
     color: #000000;
     padding: 1rem 8rem 1rem 3rem;
     align-self: start;
-    width: 30%;
+    width: 100%;
 }
 
 #contact-heading>h2, #contact-heading>p {
@@ -640,13 +640,19 @@ footer {
 .form-invalid, .form-invalid:focus {
     box-shadow: 0 0 2px 1px var(--yellow);
 }
-/* here checking how to fix autofill styles */
-input:-webkit-autofill,
+/* here checking how to fix autofill styles  */ input:-webkit-autofill,
 input:-webkit-autofill:focus {
     transition: background-color 600000s 0s, color 600000s 0s;
 }
 input[data-autocompleted] {
     background-color: transparent !important;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--contact-form-colour) inset !important;
+  -webkit-text-fill-color: white !important;
 }
 
 .error-message{
