@@ -638,7 +638,9 @@ footer {
 }
 
 .form-invalid, .form-invalid:focus {
-    box-shadow: 0 0 2px 1px var(--yellow);
+    box-shadow: 0 0 0 3px var(--background-color),
+                0 0 0 4px var(--yellow);
+    
 }
 /* here checking how to fix autofill styles  */ input:-webkit-autofill,
 input:-webkit-autofill:focus {
