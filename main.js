@@ -15,7 +15,6 @@ window.onload = () => {
         aboutLink = document.querySelector(".aboutLink"),
         xplodeWords = document.querySelectorAll(".xplode"),
         language = document.querySelector(".lang-options"),
-        mobLanguage = document.querySelector(".lang-selector"),
         form = document.getElementById("contact-form"),
         submitButton = document.getElementById("submitButton");
 
@@ -380,32 +379,9 @@ async function importJson(){
 }
 
 function liveFormChecker(event){
-    let input = event.target,
-        form = document.getElementById("contact-form"),
-        name = document.getElementById("qsdenamepofd"),
+    let name = document.getElementById("qsdenamepofd"),
         email = document.getElementById("iedfemailopv"),
-        message = document.getElementById("nqsfmmessagepods"),
-        submitButton = document.getElementById("submitButton");
-
-    // if(input == name || name.value == ""){
-    //     name.classList.add("form-invalid");
-    // } else {
-    //     name.classList.remove("form-invalid");
-    // }
-
-    // if(input == email || emailChecker(email.value) != true){
-    //     email.classList.add("form-invalid");
-    // } else {
-    //     email.classList.remove("form-invalid");
-    // }
-    
-    // if(input == message || message.value == ""){
-    //     if(message.value == ""){
-    //         message.classList.add("form-invalid");
-    //     }
-    // }else {
-    //     message.classList.remove("form-invalid");
-    // }
+        message = document.getElementById("nqsfmmessagepods");
 
     if(name.value == ""){
         name.classList.add("form-invalid");
